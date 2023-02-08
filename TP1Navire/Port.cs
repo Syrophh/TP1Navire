@@ -24,7 +24,7 @@ namespace TP1Navire
         {
             if (navires.Count < nbNaviresMax)
             {
-                navires.Add(navire);
+                this.navires.Add(navire);
             }
             else
             {
@@ -36,29 +36,33 @@ namespace TP1Navire
         {
             if (navires.Exists(x => x.Imo == imo))
             {
-                navires.RemoveAt(navires.FindIndex(x => x.Imo == imo));
+                this.navires.RemoveAt(navires.FindIndex(x => x.Imo == imo));
             }
         }
 
         public bool EstPresent(String imo)
         {
-            return navires.Exists(x => x.Imo == imo);
+            return this.navires.Exists(x => x.Imo == imo);
         }
 
         private int RecupPosition(String imo)
         {
             try
             {
-                return navires.FindIndex(x => x.Imo == imo);
+                return this.navires.FindIndex(x => x.Imo == imo);
             }
             catch { return -1; }
         }
 
         private int RecupPosition(Navire navire)
         {
-            try
+            if (this.navires.Contains(navire))
             {
-                
+                return RecupPosition(navire.Imo);
+            }
+            else
+            {
+                return -1;
             }
         }
     }
